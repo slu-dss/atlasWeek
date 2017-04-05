@@ -1,0 +1,435 @@
+---
+title: "Accessible Data Analysis"
+author: "Christy Garcia & Chris Prener"
+date: "04 Apr 2017"
+output: html_notebook
+---
+
+# R and RStudio Basics
+
+R is a programming language that is highly extensible and flexible - it can be adpated to work with everything from textual data to statistical and spatial data. [RStudio](http://rstudio.com) is a user interface for R that makes working with the language *much* easier. The first three features below that we'll discuss briefly are all aspects of RStudio - they are not part of the basic R releases.
+
+### R Notebooks
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an `html` file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the `html` file). The `html` file will always be saved in the directory that your R Markdown file is saved in.
+
+If you want to create a new R Notebook
+
+### R Markdown
+All of the writing in this document uses [R Markdown](http://rmarkdown.rstudio.com) syntax. We use Markdown because it is simple to learn and allows us to work in plain text files so we aren't dependent on proprietary (and expensive!) software. RStudio can render Markdown into various formats like `html` and `pdf`.
+
+The pair of brackets matched with the pair of paraentheses in the previous paragraph is how we hyperlink references. You won't see the url when the text is renderd - the text "R Markdown" will be a hyperlink that you can click on.
+
+We use the number sign for headings where one number sign is the highest level heading and six number signs are the lowest level headings. 
+
+*This is italicized text*, **this is bold text**, and `this is text in a typewriter font`. We use the `typewriter font` to refer to file and variable names.
+
+* We 
+* can
+* also
+* make
+* bulleted
+* lists.
+
+### R Projects
+
+R projects create a home for your analyses. When you set a R project up, it will change the **working directory** to the project's directory. This means that all of the data you save from RStudio will be saved there by default. It also means that you can open files saved in that directory without needing to worry about file paths.
+
+To create a new project, go to File > New Project... and follow the prompts. When you are done, we'll close this Markdown file.
+
+### R Packages
+
+Packages are the way that we can extend the base R software. They are typically written by R users and made available for free via a series of servers called CRAN.
+
+To install new packages, we use the `install.packages()` function where the package name is written inside the parantheses in double quotes - "package name". For the "tidyverse" package, the installation function would look like this:
+
+```{r}
+install.packages("tidyverse")
+```
+
+We'll also need a package called "devtools". Try writing out the installation script for that:
+
+```{r}
+
+```
+
+Finally, we'll need a package called "stldata" that is installed from a non-CRAN source:
+
+```{r}
+library(devtools)
+install_github("chris-prener/stldata")
+```
+
+The [tidyverse](http://tidyverse.org) is actually a family of packages for R that share a philosophy on how data analysis *should* be done (they're very opinionated!). We're going to use a couple of those packages today. One of those is the `dplyr` package. We need to load packages explicity like this:
+
+```{r}
+library(dplyr)
+```
+
+Now, you try loading the `ggplot2` package (for graphing) and the `broom` package (for exporting tidy data). When you use the library function, write it twice on separate lines, one for each of these packages:
+
+```{r}
+library(ggplot2)
+library(broom)
+```
+
+Finally, we've installed a package called `stldata` to your computer. This contains two data frames with the data we'll use today. Load the `stldata` package now:
+
+```{r}
+library(stldata)
+```
+
+### Getting Help
+
+You can prefice packages or specific functions with a question mark to get specific help files:
+
+```{r}
+?stldata
+```
+
+For our session data on murders in St. Louis:
+
+```{r}
+?stlMurders
+```
+
+Try getting the help file for our other session dataset, blood lead level test results for kids in St. Louis:
+
+```{r}
+?stlLead
+```
+
+
+# Data Cleaning
+
+Our data often do not come to us in the best shape - the variables we need may need some editing or may not be present at all. The "tidyverse" has some excellent tools for exploring and modifying our data.
+
+### Opening Data
+
+First, we'll want to load both of our data sets into R's memory. We do this by assigning the data in the `stldata` package to *objects*. For instance, we can take the data from the table `stlMurders` and assign it to an object named `murders` by using the assignment operator (`<-`):
+
+```{r}
+murders <- stlMurders
+```
+
+Now try assigning the data from the table `stlLead` to an object named `lead`:
+
+```{r}
+lead <- stlLead
+```
+
+### Exploring Values
+
+There are a number of ways that we can explore our data. We can use the `View()` function to open up a spreadsheet-like view of our data:
+
+```{r}
+View(murders)
+```
+
+Try this for the `lead` data:
+
+```{r}
+View(lead)
+```
+
+We can also use the `str()` function (the "structure" function) to get a list of all variables present in our data frame:
+
+```{r}
+str(murders)
+```
+
+Try this for the `lead` data:
+
+```{r}
+str(lead)
+```
+
+Finally, we can use the `table()` function to tabulate values from a specific variable. For instance, if we wanted to know how many murders occurred each year in St. Louis, we could ask for that data specifically by combining the object name (`murders`) with the variable name (`yearoccurred`). We separate those two pieces of text with a dollar sign:
+
+```{r}
+table(murders$yearoccurred)
+```
+
+We can use the `broom` package's `tidy()` function to make this table a bit easier to read:
+
+```{r}
+tidy(table(murders$yearoccurred))
+```
+
+If we want to save these data for later, we can save this tidy output into its very own data frame named `murdersByYear`, and then save it as a spreadsheet to our project directory using the `write.csv()` function:
+
+```{r}
+murdersByYear <- tidy(table(murders$yearoccurred))
+write.csv(murdersByYear, "murdersByYear.csv")
+```
+
+Now try creating a tidy table for murders by month using the `monthoccurred` variable:
+
+```{r}
+tidy(table(murders$monthoccurred))
+```
+
+Once you have that syntax down, save that table to its own object named `murdersByMonth` and export it as a spreadsheet:
+
+```{r}
+murdersByMonth <- tidy(table(murders$monthoccurred))
+write.csv(murdersByMonth, "murdersByMonth.csv")
+```
+
+The `write.csv()` function has a counterpart called `read.csv()` that allows you to re-open spreadsheet data and assign it to an object. This is useful for importing your own data into R!
+
+If you want to remove objects form your environment when you are done with them, you can use the `rm()` function:
+
+```{r}
+rm(murdersByYear)
+```
+
+Try removing the murders by month object you've created:
+
+```{r}
+rm(murdersByMonth)
+```
+
+
+### Renaming Variables
+
+We can rename variables easily using the `dplyr` package's `rename()` function. We need three pieces of information within the `rename()` function - the data frame, the new variable name, and the old variable name (separated by a single equals sign):
+
+```{r}
+murders <- rename(murders, date = dateoccurred)
+```
+
+This gives us a simpler variable name to work with in the future - less typing is always a plus! Every time we make a change, we need to assign that change to either an existing or a new object. 
+
+Now try renaming the `yearoccurred` and `monthoccurred` variables to `year` and `month` respectively:
+
+```{r}
+murders <- rename(murders, year = yearoccurred)
+murders <- rename(murders, month = monthoccurred)
+```
+
+### Removing Variables
+
+We can also get rid of variables easily using the `dplyr` package's `select()` function. For instance, we could remove the address data for each of the murders in our data frame using a negative sign in front of each variable we want to remove:
+
+```{r}
+murders <- select(murders, -ileadsaddress, -ileadsstreet)
+```
+
+Now, try removing the variables `geoID`, `totalPop_MOE`, `white_MOE`, `black_MOE`, `povertyTot_MOE`, and `povertyU18_MOE` from the `lead` object:
+
+```{r}
+lead <- select(lead, -geoID, -totalPop_MOE, -white_MOE, -black_MOE, -povertyTot_MOE, -povertyU18_MOE)
+```
+
+### Reformatting Variables
+
+Sometimes R imports our data but assigns it a different storage type than what we need. For instance, the data in the `year` variable in the murder data frame is really factor data (i.e. a categorical variable) but R is treading it as if it were continuous. We can reformat this using the `as.factor()` function:
+
+```{r}
+murders$year <- as.factor(murders$year)
+```
+
+Now try reformatting the lead data's variable `tractCE`, which likewise is imported as continuous variable but really isn't:
+
+```{r}
+lead$tractCE <- as.factor(lead$tractCE)
+```
+
+R comes with other functions like `as.character()`, `as.numeric`, and `as.integer()` for other types of common modifications.
+
+### Creating New Variables
+
+Finally, we can create new variables using the `dplyr` package's `mutate()` function. For instance, we can create an indictor for neighborhoods that are on the north side of St. Louis in the murder data frame. 
+
+We'll use the `ifelse()` function to help with this process. If our test (a neighborhood number greater than 45) is evaluated as 'TRUE', the new variable will contain "North City". Otherwise, it will contain "South City":
+
+```{r}
+murders <- mutate(murders, northSide = ifelse(neighborhood > 45, "North City", "South City"))
+```
+
+This creates a **character** variable with text data in it. R is generally more accomodating to using string/character data in plots and analyses than other statistical packages are.
+
+We can make our tests more complicated by using logical operators like `&` (and) or `|` (or):
+
+```{r}
+murders <- mutate(murders, greaterVille = ifelse(
+  neighborhood >= 50 & neighborhood <= 59, TRUE, FALSE))
+```
+
+This creates a **logical** variable, which *must* contain either `TRUE` or `FALSE` values. These are treated in the same way that many statistics packages treat variables coded as `0` or `1`.
+
+This logical variable is `TRUE` if the neighborhood is one of these:
+* 50 - Wells Goodfellow
+* 51 - Academy
+* 52 - Kingsway West
+* 53 - Fountain Park
+* 54 - Lewis Place
+* 55 - Kingsway East
+* 56 - Greater Ville
+* 57 - The Ville
+* 58 - Vandeventer
+* 59 - Jeff Vanderlou
+
+Finally, we can make new variables based on the outcome of mathematical equations. For instance, the lead data contains a variable named `pctElevated`. We can create a new variable that represents the proportion of elevated tests by multiplying `pctElevated` by 100:
+
+```{r}
+lead <- mutate(lead, propElevated = pctElevated / 100)
+```
+
+We use the standard mathematical operators -, +, /, and * for these operations.
+
+Now try creating a new varable in the lead data for [Census Tracts](https://www.census.gov/geo/reference/gtc/gtc_ct.html) that caculates the number of positive tests (name this `countElevated`) rather than the proportion by multiplying the number of kids tested (`countTested`) by the proportion of kids with elevated tests (`propElevated`):
+
+```{r}
+lead <- mutate(lead, countElevated = countTested * propElevated)
+```
+
+
+# Descriptive statistics 
+
+In this section, we will cover descriptive statistics that you can use to get a sense of your data before moving on to more complicated stastistics and plotting. The functions covered are range, mean, median, and standard deviation. In order to single out a variable to be examined, R uses this syntax: dataframe$variablename. Our example singles out the `pctElevated` variable in the `lead` dataframe, which shows the percent of children tested in each datapoint that had elevated lead levels.   
+
+```{r}
+range(lead$pctElevated)
+mean(lead$pctElevated)
+median(lead$pctElevated)
+sd(lead$pctElevated)
+```
+
+The `summary` command gives us most of this information at once for the `pctElevated` variable. 
+
+```{r}
+summary(lead$pctElevated)
+```
+
+Now try these commands (range, mean, median, sd, summary) with the `countTested` variable in the `lead` dataframe, which shows how many children were tested by datapoint. 
+
+```{r}
+range(lead$countTested)
+mean(lead$countTested)
+median(lead$countTested)
+sd(lead$countTested)
+summary(lead$countTested)
+```
+
+The `summary` command can also be used to look at all of the variables in a dataframe at the same time. 
+
+```{r}
+summary(lead)
+```
+
+Now try this with the `murders` dataframe. 
+
+```{r}
+summary(murders)
+```
+
+# Subsetting data 
+
+During your data analysis, especially in making pretty plots, you may need to subset the dataframe in order to only consider a portion of the data. R offers a simple way of doing this with the `subset` command. Start with the name you would like to assign to this new subsetted dataframe (`northCity`) and then specify which larger dataframe it is coming from (`murders`) and which variable you would like to subset based on. You can then run the `summary` command again to get a sense of this subset of the data. 
+
+```{r}
+northCity <- subset(murders, northSide == "North City")
+summary(northCity)
+```
+
+Now subset the `murder` data for those neighborhoods pertaining to the `greaterVille` area and look at `summary` for this subset. 
+
+```{r}
+greaterVille <- subset(murders, greaterVille == "TRUE")
+summary(greaterVille)
+```
+
+# Basic plots
+
+R offers many ways of making sophisticated plots, including the package `ggplot2`. We will use this package (already loaded as part of `tidy verse`) to makes some plots without worrying too much about the syntax of the commands. For more information on `ggplot2`, see Wickham (2015). 
+
+#### Histograms
+
+The basic `ggplot2` call requires the assignment of a dataframe and an asthetic variable in the first line to an object named `pctElevated`. The second line calls the specific type of plot we want to make as a "geom". In this case, we'll use the `geom_histogram()`. The `binwidth = val` can be adapted as needed to adjust the appearance of the plot. Note that we call the object `pctElevated` afterwards to display it.
+
+```{r}
+pctElevated <- ggplot(lead, aes(x=pctElevated)) +
+  geom_histogram(binwidth = 5)
+pctElevated
+```
+
+Now try making a histogram for the `countElevated` variable in the `lead` dataframe. 
+
+```{r}
+countElevated <- ggplot(lead, aes(x=countElevated)) +
+  geom_histogram(binwidth = 5)
+countElevated
+```
+
+
+#### Bar Charts
+
+In this example, we assign our plot of the `northCity` dataframes's `neighborhood` variable to the `northNhood` object. We use the `geom_bar()` function to create a bar plot of these data, which indicate the number of murders in North City vs. South City. As in the previous example, we call the object `northNhood` afterwards to display it.
+
+```{r}
+northNhood <- ggplot(northCity, aes(x=neighborhood)) +
+  geom_bar()
+northNhood
+```
+
+Now try making a bar plot for the `neighborhood` variable in the `greaterVille` dataframe.
+
+```{r}
+greaterVille$neighborhood <- as.factor(greaterVille$neighborhood)
+greaterBar <- ggplot(greaterVille, aes(x=neighborhood)) +
+  geom_bar()
+greaterBar
+```
+
+
+#### Scatter plots
+
+For our scatter plot example, we assign our plot of the `lead` dataframe's `pctElevated` and `povertyTot` variables to the `leadPoverty` object. We use the `geom_point` function to create a scatter plot of these data, which indicate the percent of elevated lead levels by the number of people living in poverty. Before, we just had one variable name in aes() since we were only plotting one varaible. Now, we specify the two variables we would like to plot in the scatter plot, separated by a comma, with the variable on the x-axis listed first. 
+
+```{r}
+leadPoverty <- ggplot(lead, aes(pctElevated, povertyTot)) + geom_point()
+leadPoverty 
+```
+
+We can also add a smooth curve or linear regression line (with confidence intervals) to our plot by adding the `geom_smooth` function to our code. 
+
+```{r}
+leadSmooth <- ggplot(lead, aes(pctElevated, povertyTot)) + geom_point() + geom_smooth()
+leadSmooth
+leadLinear <- ggplot(lead, aes(pctElevated, povertyTot)) + geom_point() + geom_smooth(method="lm")
+leadLinear
+```
+
+Now try making a scatter plot with a fitted line (either type) for the `pctElevated` and `povertyU18` variables in the `lead` dataframe. 
+
+```{r}
+leadU18 <- ggplot(lead, aes(pctElevated, povertyU18)) + geom_point() + geom_smooth(method="lm")
+leadU18
+```
+
+#### Saving plots 
+
+To save the plots we have made, we can use the function `ggsave`, which will save the plot to our working directory. First specify the object name ('leadU18') and then after 'file' specify the file name and type.
+
+```{r}
+ggsave(leadU18, file = "leadU18.png")
+```
+
+
+# Further resources
+
+[R for Data Science](http://r4ds.had.co.nz)
+[RStudio Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
+Wickham, H. (2016). ggplot2: elegant graphics for data analysis. Springer.
