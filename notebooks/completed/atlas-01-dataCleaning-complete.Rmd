@@ -101,7 +101,7 @@ murders <- rename(murders, neighborhood = nhood)
 
 ### Removing Variables
 
-We can also get rid of variables easily using the `dplyr` package's `select()` function. For instance, we could remove the address data for each of the murders in our data frame using a negative sign in front of each variable we want to remove:
+We can also get rid of variables easily using the `dplyr` package's `select()` function. For instance, we could remove some of the date data for each of the murders in our data frame using a negative sign in front of each variable we want to remove:
 
 ```{r}
 murders <- select(murders, -month, -day)
@@ -115,7 +115,7 @@ lead <- select(lead, -geoID, -totalPop_MOE, -white_MOE, -black_MOE, -povertyTot_
 
 ### Creating New Variables
 
-Finally, we can create new variables using the `dplyr` package's `mutate()` function. For instance, we can create an indictor for neighborhoods that are on the north side of St. Louis in the murder data frame. 
+Finally, we can create new variables using the `dplyr` package's `mutate()` function. For instance, we can create an indicator for neighborhoods that are on the north side of St. Louis in the murder data frame. 
 
 We'll use the `ifelse()` function to help with this process. If our test (a neighborhood number greater than 45) is evaluated as 'TRUE', the new variable will contain "North City". Otherwise, it will contain "South City":
 
@@ -123,7 +123,7 @@ We'll use the `ifelse()` function to help with this process. If our test (a neig
 murders <- mutate(murders, northSide = ifelse(neighborhood > 45, "North City", "South City"))
 ```
 
-This creates a **character** variable with text data in it. R is generally more accomodating to using string/character data in plots and analyses than other statistical packages are.
+This creates a **character** variable with text data in it. R is generally more accommodating to using string/character data in plots and analyses than other statistical packages are.
 
 We can make our tests more complicated by using logical operators like `&` (and) or `|` (or):
 
@@ -153,7 +153,7 @@ lead <- mutate(lead, propElevated = pctElevated / 100)
 
 We use the standard mathematical operators -, +, /, and * for these operations.
 
-Now try creating a new varable in the lead data for [Census Tracts](https://www.census.gov/geo/reference/gtc/gtc_ct.html) that caculates the number of positive tests (name this `countElevated`) rather than the proportion by multiplying the number of kids tested (`countTested`) by the proportion of kids with elevated tests (`propElevated`):
+Now try creating a new variable in the lead data for [Census Tracts](https://www.census.gov/geo/reference/gtc/gtc_ct.html) that calculates the number of positive tests (name this `countElevated`) rather than the proportion by multiplying the number of kids tested (`countTested`) by the proportion of kids with elevated tests (`propElevated`):
 
 ```{r}
 lead <- mutate(lead, posTest = countTested*propElevated)
