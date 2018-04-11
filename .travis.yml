@@ -18,4 +18,6 @@ matrix:
       os: osx
 
 script:
-  - Rscript -e "rmarkdown::render('notebook/lesson-template-complete.Rmd')"
+  - Rscript -e "rmarkdown::render('notebook/complete/atlas-01-dataCleaning-complete.Rmd')"
+  - Rscript -e "rmarkdown::render('notebook/complete/atlas-02-dataExploration-complete.Rmd')"
+  - Rscript -e "rmarkdown::render('notebook/complete/atlas-02-dataPlotting-complete.Rmd')"
