@@ -1,0 +1,21 @@
+Package: lesson-template
+Title: SLU DSS - Lesson Template
+Version: 0.1.1
+Authors@R: person("Christopher", "Prener", email = "chris.prener@slu.edu",
+                  role = c("aut", "cre"))
+Description: This repository contains a sample lesson structure for SLU
+    Data Science Seminar lessons.
+Depends: R (>= 3.3)
+License: CC-BY-SA-4.0 + LICENSE
+Web: https://slu-dss.github.io
+URL: https://github.com/slu-dss/lesson-template
+BugReports: https://github.com/slu-soc5650/lecture-09/issues
+Imports:
+    dplyr,
+    ggplot2,
+    here,
+    knitr,
+    readr,
+    rmarkdown,
+    skimr,
+    usethis
