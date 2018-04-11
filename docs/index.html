@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 # Atlas Week 2018
-## An Introduction to <code>R</code>, RStudio, and the <code>tidyverse</code>
+## Accessible Data Analysis
 ### SLU DSS
 ### 04/11/2018
 
@@ -79,6 +79,19 @@ update.packages()
 ```
 
 ---
+# Installing Packages
+### Your Turn
+Practice installing a package called `here`.
+
+--
+### Solution
+
+
+```r
+install.packages("here")
+```
+
+---
 # Loading Packages
 
 While we only have to install packages once per user, we must load them at the beginning of **each** session using the `library()` function:
@@ -87,11 +100,172 @@ While we only have to install packages once per user, we must load them at the b
 ```r
 library(usethis)
 ```
+
+---
+# Loading Packages
+### Your Turn
+Practice loading the package you just installed called `here`.
+
+--
+
+### Solution
+
+
+```r
+library("here")
+```
+
+```
+## here() starts at /Users/chris/GitHub/DSS/atlasWeek
+```
+
+---
+# Using Functions
+
+The easiest way to use functions is to enter them into the **console** and hit **enter** or **return** when you are ready to execute the function.
+
+Functions contain one or more *arguments* that we provide inputs for, and then function's code uses those arguments to (hopefully!) produce a desired output.
+
+For example, the `use_course()` function from `usethis` takes one required argument - the **url** of the GitHub repository that contains course materials to download:
+
+
+```r
+use_course(url = "https://goo.gl/cQxw6n")
+```
+
+When you execute it, you'll be asked for further inputs in your **console** - you should proceeded with the download and then delete the ZIP file.
+
+---
+# R Projects
+When you download the ATLAS week course from GitHub, you'll see a file named `atlasWeek.Rproj` in the top-level of the directory:
+
+![](img/project.png)
+
+
+---
+# R Projects
+`atlasWeek.Rproj` is a file created by RStudio that helps us manage our **working directory**, the location on our computer that `R` assumes we want to open files from and save files to.
+
+Working directories are a **huge** struggle for new programmers, because they require an awareness of our file system that end users are not routinely required to have.
+
+We can use `.Rproj` files to open RStudio and automatically set the working directory to the folder the `.Rproj` file is in. New R projects can be created by going to `File &gt; New Project...` in RStudio.
+
+---
+# R Projects
+Once we have a `R` project open, we can use **relative paths** to open and save files as long as our data, code, and output will be stored **inside** our project folder. This is a best practice for **reproducible research** because your project can be moved between computers and will still execute even though the location of the files has changed.
+
+We'll use the `here` package to specify file paths. This gives us the flexibility to use subfolders like `data/` and `notebooks/`:
+
+
+```r
+here("data", "stlMurders.csv")
+```
+
+```
+## [1] "/Users/chris/GitHub/DSS/atlasWeek/data/stlMurders.csv"
+```
+
+We enclose each folder and file with double quotes, and separate them with commas.
+
+---
+# Projects Organization
+We recommend using a standard set of sub-folders for each project to keep things organized:
+
+![](img/project.png)
+
+---
+# More Set-up
+There are a few other packages that we'll need for today. You can find them listed in `references/SETUP.md` - open that file using RStudio's file explorer and use `install.packages()` to install them. 
+
+For the `tidyverse` packages, you can use this syntax instead of installing them individually:
+
+
+```r
+install.packages("tidyverse")
+```
+
+---
+# R Notebooks
+Our DSS seminars teach using `R` Notebooks, which are special types of files that allow us to "weave" narrative text about our work with `R` code. These are enabled by using two primary packages - `knitr` and `RMarkdown`.
+
+You can open our first notebook by going to the `notebooks/` sub-folder in RStudio's file explorer and opening `atlas-01-dataCleaning.Rmd`.
+
+Our `R` notebooks are set-up to create an `.html` output that you can preview in a web browser, and a `.md` Markdown file that renders nicely on GitHub. 
+
+If you use the `.html` notebooks, you can email them to colleagues - they will include all of your narrative text, your code, and the associated output.
+
+---
+# R Notebooks
+Use the green "play button" on the right side of code chunks to execute them:
+
+![](img/exampleChunk.png)
+
+---
+# R Notebooks
+Be **very** careful with the triple backticks at the beginning and end of the code chunk! Both of the following images have modified the code chunk to remove back-ticks.
+
+In the first example, the three backticks at the end of the chunk have been removed so that all of the proceeding narrative text is treated as if it is code itself:
+
+![](img/probChunk1.png)
+
+In this example, two code chunks have been inadvertently been paired together:
+
+![](img/probChunk2.png)
+
+---
+# Markdown
+All of the writing in this document uses [R Markdown](http://rmarkdown.rstudio.com) syntax. We use Markdown because it is simple to learn and allows us to work in plain text files so we aren't dependent on proprietary (and expensive!) software. RStudio can render Markdown into various formats like `html` and `pdf`.
+
+---
+# Markdown
+We use the number sign for headings where one number sign is the highest level heading and six number signs are the lowest level headings. 
+
+### Input:
+```markdown
+# Top-level Heading
+## Second-level Heading
+```
+
+### Output:
+# Top-level Heading
+## Second-level Heading
+
+---
+# Markdown
+We use asterisk symbols and back-ticks for including rich text.
+
+### Input
+```
+*This is italicized text*, **this is bold text**, and `this is text 
+in a typewriter font`. We use the `typewriter font` to refer to 
+file and variable names.
+```
+
+### Output
+*This is italicized text*, **this is bold text**, and `this is text in a typewriter font`. We use the `typewriter font` to refer to file and variable names.
+
+---
+# Getting Help
+There are lots of resources online for getting help, and we've linkd to some of them in the `README.md` file included with this project.
+
+You can also get help from within RStudio by using the `?` syntax. The following syntax will give us the package-level help file for `usethis`:
+
+
+```r
+?usethis
+```
+
+And this will give us the specific help file for `use_course()`:
+
+
+```r
+?use_course
+```
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
-"highlightLines": true,
+"highlightLines": false,
 "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {

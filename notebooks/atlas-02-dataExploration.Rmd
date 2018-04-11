@@ -1,0 +1,96 @@
+---
+title: "Accessible Data Analysis: Data Exploration"
+author: "Christy Garcia and Chris Prener"
+date: '(`r format(Sys.time(), "%B %d, %Y")`)'
+output: 
+  github_document: default
+  html_notebook: default 
+---
+
+## Introduction
+This is the second of three notebooks for our ATLAS week session.
+
+## Dependencies
+The following packages are required for this notebook:
+
+```{r load-dependencies}
+# tidyverse packages
+library(dplyr)  # data wrangling
+library(readr)  # data import
+
+# other packages
+library(here)    # file paths
+library(janitor) # frequency tables
+library(skimr)   # descriptive statistics
+```
+
+## Loading Data
+We need the same two data tables we used in the first notebook for this notebook as well:
+
+```{r}
+lead <- read_csv(here("data", "stlLead.csv"))
+murders <- read_csv(here("data", "stlMurders.csv"))
+```
+
+## Exploring Data
+### Review
+In the first notebook, we used the `glimpse()` function from `dplyr` to get a list of all variables present in our data frame:
+
+```{r}
+glimpse(murders)
+```
+
+This is an easy way to get some basic information about each variable.
+
+### Descriptive Statistics
+The `skimr` package provides some numeric summaries of the data present in a given data frame. The `skim()` function can be used to generate a report that breaks down variables by type, and provides the most relevant descriptive statistics based on that distinction:
+
+```{r}
+skim(murders)
+```
+
+Now you try generating some descriptive statistics for the `lead` data:
+
+```{r}
+
+```
+
+### Pipes
+All of the `tidyverse` packages and other associated packages, like `janitor` (introduced below), use the pipe operator `%>%`. The advantage of using the pipe is that it makes the code easier to read by "piping" a series of functions together in a way that can be read by a paragraph:
+
+1. We take the `murders` data, **then**
+2. we create a new variable named `northSide`, **then**
+3. we create a new variable named `greaterVille`, and
+4. assign the results back onto the `murders` data frame.
+
+```{r}
+murders %>%
+  mutate(northSide = ifelse(nhood > 45, "North City", "South City")) %>%
+  mutate(greaterVille = ifelse(nhood >= 50 & nhood <= 59, TRUE, FALSE)) -> murders
+```
+
+Pipes don't necessarily make our code more efficient, but they make it more human readable.
+
+### Frequency Tables
+The `janitor` package makes it easy to create frequency tables for string and factor data. We use the `tabyl()` function to accomplish this. At its simplest, `tably()` takes just the variable name when included at the end of a pipe:
+
+```{r}
+murders %>%
+  tabyl(year)
+```
+
+We can add "adornments", including a total row at the bottom and well-formatted percent symbols:
+
+```{r}
+murders %>%
+  tabyl(year) %>%
+  adorn_totals() %>%
+  adorn_pct_formatting()
+```
+
+Now its your turn. Create a frequency table of the `northSide` variable using pipes and `janitor`:
+
+```{r}
+
+```
+
