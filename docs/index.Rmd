@@ -21,28 +21,60 @@ options(htmltools.dir.version = FALSE)
 # Overview
 
 ---
-# What is a lesson?
+# What is the SLU DSS?
 
-Each lesson for SLU DSS is a part of a seminar, which is a group of lessons organized around a core theme.
+The [SLU Data Science Seminar](https://slu-dss.githb.io) (DSS) is a collaborative, interdisciplinary group at Saint Louis University focused on building researchers’ data science skills using open source software. We currently host seminars focused on the programming language `R`.
 
---
+We host:
 
-We currently have six seminars that we have developed content for:
-
-1. Getting Started with `R`
-
-2. Data Wrangling in `R`
-
-3. Plots and Figures in `R`
-
-4. Building Linear Models in `R`
-
-5. Mapping Data in `R`
-
-6. Functions and Packages in `R`
-
---
-
-Seminars typically have four lessons. Each lesson is designed to be delivered in an hour-long session.
+1. Four-part seminars each semester on specific topics related to `R`
+2. Brownbags by guest facilitators showcasing how they use `R` for research or teaching
+3. An ATLAS Week Session introducing participants to `R`
 
 ---
+# Basics
+
+- **`R`** is a programming language first developed in 1993 for statistical computing
+    - The `R` ecosystem has rapidly expanded in the last ten years to include tools for project management, graphics production, machine learning, GIS, and dissemination (these slides are made with `R`!)
+- People are attracted to `R` because it is:
+    - *free*
+    - *highly extensible* - there are over 12,000 packages available on **CRAN** 
+
+--
+- ...but `R` has a bit of a reputation...
+    
+--
+
+- RStudio is a **G**raphical **U**ser **I**nterface (**GUI**) for `R` that makes working with the programming language *much* easier
+
+--
+
+- One of the reasons interest in `R` has grown rapidly is the **`tidyverse`**, which is a family of packages that use an easy to read and implement syntax for conducting common data management tasks
+
+---
+# Installing Packages
+
+One of the first tasks we face with `R` is getting packages installed. The `base` distribution of `R` comes with some packages, but we'll need a few more for today. Each package contains a set of *functions* (easy to execute, generalized blocks of code) that we can use in our own projects.
+
+The `install.packages()` function from `utils` is the easiest way to install a package:
+
+```{r install-packages, eval=FALSE}
+install.packages("usethis")
+```
+
+--
+
+We only need to install packages once per user, but we may need to update them periodically:
+
+```{r update-packages, eval=FALSE}
+update.packages()
+```
+
+---
+# Loading Packages
+
+While we only have to install packages once per user, we must load them at the beginning of **each** session using the `library()` function:
+
+```{r load-packages}
+library(usethis)
+```
