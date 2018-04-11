@@ -1,0 +1,190 @@
+---
+title: "Lesson Template"
+subtitle: "An Overview of How Our Lessons Are Structured"
+author: "SLU DSS"
+date: "3/20/2018"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: inverse, center, middle
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# Overview
+
+---
+# What is a lesson?
+
+Each lesson for SLU DSS is a part of a seminar, which is a group of lessons organized around a core theme.
+
+--
+
+We currently have six seminars that we have developed content for:
+
+1. Getting Started with `R`
+
+2. Data Wrangling in `R`
+
+3. Plots and Figures in `R`
+
+4. Building Linear Models in `R`
+
+5. Mapping Data in `R`
+
+6. Functions and Packages in `R`
+
+--
+
+Seminars typically have four lessons. Each lesson is designed to be delivered in an hour-long session.
+
+---
+
+# How are lessons organized?
+
+Each lesson has a corresponding GitHub repository. We are currently revising each lesson so that it contains the following key items:
+
+* A **`README.md`** file that describes the lesson's objectives, provides a `usethis` download link, and provides links to additional resources.
+
+* A Creative Commons [**BY-SA 4.0 license**](https://creativecommons.org/licenses/by-sa/4.0/)
+
+* An **R project** (`.Rproj`) file that participants can use to easily access lesson materials.
+
+* A **`.gitignore`** file 
+
+* A **`DESCRIPTION`** file that provides systematically organized metadata, and allows us to test repositories using **continuous integration** tools to ensure our code stays up-to-date
+
+    * Settings **`.yml`** files for Travis-CI (for testing code on macOS/linux) and Appveyor (for testing code on Windows)
+
+---
+
+# How are lessons organized?
+
+Each lesson has a corresponding GitHub repository. We are currently revising each lesson so that it contains the following key items:
+
+* Any **data** that is required, *though we prioritize using data available in packages.*
+
+* An **R notebook** written in the style of [literate programming](https://en.wikipedia.org/wiki/Literate_programming) that contains narrative text that explains the particulars of a topic, provides example code, and provides empty code blocks for participants to practice in.
+
+   * A complete version of the R notebook that contains all code, including the solutions to the empty areas provided for participant practice.
+
+* A set of **slides** (like these!) made with `xaringan` that give a high level overview of the lesson.
+
+* A **challenge** for participants to complete after the lesson if they want to practice, and a corresponding set of replication code for participants to check their own work.
+
+---
+
+# How are lessons organized?
+
+Each lesson has a corresponding GitHub repository. We are currently revising each lesson so that it contains the following key items:
+
+* A set of **reference** materials that help participants get set-up and highlight key terms, concepts, and packages 
+
+* A **`.github/`** directory with instructions for contributing to the lesson
+
+* A **`CONTRIBUTORS.md`** file acknowledging everyone who has contributed to the lesson
+
+---
+
+# How can I help?
+
+So glad that you asked! We are looking for "lesson maintainers" to help us with a variety of tasks:
+
+1. Converting our current lessons into this lesson format.
+
+2. Adding overview slides like these.
+
+3. Updating code so that it follows the most state-of-the-art standards (e.g. `tidyverse`)
+
+4. Creating the "complete" versions of notebooks that contain solutions.
+
+5. Creating challenges for students to test their knowledge after each lesson.
+
+--
+
+No expertise with the lesson is necessary - we're happy to help you grow your skills with `R`, the `tidyverse`, and Git/GitHub!
+
+---
+
+class: inverse, center, middle
+
+# Getting Started
+
+---
+
+# What You'll Need
+
+To successfully contribute as a lesson maintainer, you'll need the following software tools installed on your computer:
+
+1. `R` ([download](https://www.r-project.org))
+
+2. RStudio ([download](https://www.rstudio.com/products/rstudio/download/#download))
+
+3. Git ([download](https://git-scm.com))
+
+It isn't necessary, but a flexible text editor like [Atom](https://atom.io) is also very useful for updating particular parts of lessons.
+
+---
+
+# What You'll Need
+
+You'll also need a few R packages that you can download and install from CRAN:
+
+1. [`devtools`](https://github.com/r-lib/devtools)
+
+2. [`knitr`](https://yihui.name/knitr/)
+
+3. [`RMarkdown`](https://rmarkdown.rstudio.com)
+
+4. the [`tidyverse`](http://tidyverse.org)
+
+--
+
+To install a package from CRAN, type the following into your console:
+
+```r
+install.packages("devtools")
+```
+
+---
+
+# What You *Might* Need
+
+If you are contributing to the development of slides for lessons, you'll need the [`xaringan`](https://github.com/yihui/xaringan) package.
+
+--
+
+To install a package from GitHub using `devtools`, type the following into your console:
+
+```r
+devtools::install_github("yihui/xaringan")
+```
+
+--
+
+If you are contributing to our GIS seminar's lessons, you'll need the [`sf`](https://github.com/r-spatial/sf) package from CRAN and the [development version of `ggplot2`](https://github.com/tidyverse/ggplot2/) from GitHub.
+
+---
+
+# More Details, Please!
+
+We are building a [wiki](https://github.com/slu-dss/lesson-template/wiki) with additional details to help guide lesson maintainers.
+
+---
+
+# How Can I Get Started?
+
+Contact one of the SLU DSS organizers:
+
+* [Christina Gacia, Ph.D.](mailto:christina.garcia@slu.edu)
+
+* [Kelly Lovejoy, Ph.D.](mailto:kelly.lovejoy@slu.edu@slu.edu)
+
+* [Christopher Prener, Ph.D.](mailto:chris.prener@slu.edu})
