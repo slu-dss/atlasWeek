@@ -2,20 +2,19 @@
 
 ## Key Topics
 
-* Lesson maintenance
-* Lesson template
+*
+*
 
 ## Key Tools
 
 ### Packages
 
-* `knitr`
-* `rmarkdown`
-* `usethis`
-* `xaringan`
+* `dplyr`
+* `ggplot2`
+* `RMarkdown`
+
 
 ### Tools
 
-* Git and GitHub
 * `R`
 * RStudio
