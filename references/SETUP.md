@@ -18,7 +18,7 @@ install.packages("tidyverse")
 This lesson requires the following `R` packages from CRAN:
 
 - [`here`](https://github.com/krlmlr/here)
-- `janitor`
+- [`janitor`](https://github.com/sfirke/janitor)
 - [`knitr`](https://yihui.name/knitr/)
 - [`RMarkdown`](https://rmarkdown.rstudio.com)
 - [`skimr`](https://github.com/ropenscilabs/skimr)
