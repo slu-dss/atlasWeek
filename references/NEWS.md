@@ -11,4 +11,4 @@
 * Add `CONTRIBUTORS.md`
 * Add CC-BY-SA license, a `README`, and a `.Rproj` file
 * Add `data/` to include data for our sample lesson materials
-* Add `notebook/` with sample lesson materials
+* Add `notebooks/` with three lesson notebooks and completed versions
