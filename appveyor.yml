@@ -54,7 +54,7 @@ build_script:
 test_script:
   - Rscript -e "rmarkdown::render('notebooks/complete/atlas-01-dataCleaning-complete.Rmd')"
   - Rscript -e "rmarkdown::render('notebooks/complete/atlas-02-dataExploration-complete.Rmd')"
-  - Rscript -e "rmarkdown::render('notebooks/complete/atlas-02-dataPlotting-complete.Rmd')"
+  - Rscript -e "rmarkdown::render('notebooks/complete/atlas-03-dataPlotting-complete.Rmd')"
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*
