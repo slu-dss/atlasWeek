@@ -19,9 +19,6 @@ matrix:
     - r: devel
       os: osx
 
-before_isntall:
-  - Rscript -e 'install.packages("janitor")'
-
 script:
   - Rscript -e "rmarkdown::render('notebooks/complete/atlas-01-dataCleaning-complete.Rmd')"
   - Rscript -e "rmarkdown::render('notebooks/complete/atlas-02-dataExploration-complete.Rmd')"
