@@ -1,5 +1,6 @@
 # atlasWeek <img src="/img/logo.png" align="right" />
-[![](https://img.shields.io/badge/lesson%20status-draft-orange.svg)](https://github.com/slu-dss/atlasWeek/)
+[![](https://img.shields.io/badge/seminar-atlas%20week-brightgreen.svg)](https://github.com/slu-dss/atlasWeek/)
+[![](https://img.shields.io/badge/lesson%20status-stable-brightgreen.svg)](https://github.com/slu-dss/atlasWeek/)
 [![](https://img.shields.io/github/release/slu-dss/atlasWeek.svg?label=version)](https://github.com/slu-dss/atlasWeek/releases)
 [![](https://img.shields.io/github/last-commit/slu-dss/atlasWeek.svg)](https://github.com/slu-dss/atlasWeek/commits/master)
 [![Travis-CI Build Status](https://travis-ci.org/slu-dss/atlasWeek.svg?branch=master)](https://travis-ci.org/slu-dss/atlasWeek)
