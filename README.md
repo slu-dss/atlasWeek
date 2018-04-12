@@ -12,21 +12,29 @@ This lesson provides an introduction to `R`, RStudio, and the `tidyverse`. It is
 ### Objectives
 At the end of this lesson, participants should be able to:
 
-1. Create and manage `R` projects
+1. Create and manage projects using `R`, including with `R` projects and `R` notebooks
 2. Use `readr` to import data from `.csv` files
 3. Employ `dplyr` to clean and manipulate data
-4. Use `janitor` to create frequency tables
-5. Create basic plots of data using `ggplot2`
+4. Use `skimir` to calculate descriptive statistics
+5. Use `janitor` to create frequency tables
+6. Create basic plots of data using `ggplot2`
 
 ### Lesson Resources
 * The [`SETUP.md`](/references/SETUP.md) file in the [`references/`](/references) directory contains a list of packages required for this lesson
 * The [`notebook/`](/notebook) directory contains a sample notebook and a completed notebook that emulate the template we use during lessons
-* The [lesson slides](https://slu-dss.github.io/lesson-template/) provide an overview of `R`, RStudio, and project organization
+* The [lesson slides](https://slu-dss.github.io/atlasWeek/) provide an overview of `R`, RStudio, and project organization
 * The [`references/`](/references) directory also contains other notes on changes to the repository, key topics, terms, data sources, and software.
+* The [`notebooks/`](/notebooks) directory contains three notebooks on (1) data cleaning, (2) data exploration, and (3) data plotting. Completed versions of the notebooks are also included.
 
 ### Extra Resources
 * The [`tidyverse` website](http://tidyverse.org)
 * Hadley Wickham's excellent [R for Data Science](http://r4ds.had.co.nz) provides an excellent overview of how to use the `tidyverse` for various tasks
+* RStudio's cheatsheets:
+    * [data import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)
+    * [data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+    * [data wrangling](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+    * [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+* Github's [Mastering Markdown guide](https://guides.github.com/features/mastering-markdown/)
 
 ## Access Lesson
 You can download this lesson to your Desktop easily using `usethis`:
